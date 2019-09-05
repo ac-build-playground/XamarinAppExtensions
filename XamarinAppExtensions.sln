@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinAppExtensions.iOS", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinAppExtensions", "XamarinAppExtensions\XamarinAppExtensions.csproj", "{0DA8A50C-4F64-437D-AC28-8F5A3A656390}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Today", "Today\Today.csproj", "{263AAD38-91AC-4A99-843C-E6D8B7C5E1EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,5 +55,17 @@ Global
 		{0DA8A50C-4F64-437D-AC28-8F5A3A656390}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{0DA8A50C-4F64-437D-AC28-8F5A3A656390}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{0DA8A50C-4F64-437D-AC28-8F5A3A656390}.Release|iPhone.Build.0 = Release|Any CPU
+		{263AAD38-91AC-4A99-843C-E6D8B7C5E1EC}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
+		{263AAD38-91AC-4A99-843C-E6D8B7C5E1EC}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
+		{263AAD38-91AC-4A99-843C-E6D8B7C5E1EC}.Release|Any CPU.ActiveCfg = Release|iPhone
+		{263AAD38-91AC-4A99-843C-E6D8B7C5E1EC}.Release|Any CPU.Build.0 = Release|iPhone
+		{263AAD38-91AC-4A99-843C-E6D8B7C5E1EC}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{263AAD38-91AC-4A99-843C-E6D8B7C5E1EC}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{263AAD38-91AC-4A99-843C-E6D8B7C5E1EC}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{263AAD38-91AC-4A99-843C-E6D8B7C5E1EC}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{263AAD38-91AC-4A99-843C-E6D8B7C5E1EC}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{263AAD38-91AC-4A99-843C-E6D8B7C5E1EC}.Debug|iPhone.Build.0 = Debug|iPhone
+		{263AAD38-91AC-4A99-843C-E6D8B7C5E1EC}.Release|iPhone.ActiveCfg = Release|iPhone
+		{263AAD38-91AC-4A99-843C-E6D8B7C5E1EC}.Release|iPhone.Build.0 = Release|iPhone
 	EndGlobalSection
 EndGlobal

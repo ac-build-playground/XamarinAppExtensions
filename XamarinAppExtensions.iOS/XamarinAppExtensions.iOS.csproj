@@ -129,5 +129,10 @@
       <Project>{0DA8A50C-4F64-437D-AC28-8F5A3A656390}</Project>
       <Name>XamarinAppExtensions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Today\Today.csproj">
+      <IsAppExtension>true</IsAppExtension>
+      <Project>{263AAD38-91AC-4A99-843C-E6D8B7C5E1EC}</Project>
+      <Name>Today</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
