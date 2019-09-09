@@ -58,9 +58,9 @@
         <MtouchArch>ARM64</MtouchArch>
         <CodesignKey>iPhone Developer</CodesignKey>
     </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'TestSeaparateConfig|AnyCPU' ">
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'TestSeaparateConfig|iPhone' ">
       <Optimize>false</Optimize>
-      <OutputPath>bin\TestSeaparateConfig</OutputPath>
+      <OutputPath>bin\iPhone\TestSeaparateConfig</OutputPath>
       <DefineConstants></DefineConstants>
       <WarningLevel>4</WarningLevel>
       <CodesignKey>iPhone Developer</CodesignKey>
