@@ -140,5 +140,10 @@
       <Project>{263AAD38-91AC-4A99-843C-E6D8B7C5E1EC}</Project>
       <Name>Today</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Watch\Watch.WatchOSApp\Watch.WatchOSApp.csproj">
+      <IsWatchApp>true</IsWatchApp>
+      <Project>{1B19CC0C-83C6-420B-A111-D7BC751AC01E}</Project>
+      <Name>Watch.WatchOSApp</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
