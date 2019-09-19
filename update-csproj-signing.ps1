@@ -51,7 +51,6 @@ function ParseCsprojFile {
   $project = $csprojXml.Project;
 
   if ($csprojXml.Project -and $csprojXml.Project.PropertyGroup) {
-    $updated = false
     for ($i = 0; $i -lt $targetBundleIds.Length; $i++) {
       $bundleId = $targetBundleIds[$i];
       if ($bundleId -eq $projectBundleId) {
@@ -67,13 +66,8 @@ function ParseCsprojFile {
         }
 
         $csprojXml.Save($projectPath);
-        $updated = true
         Write-Host "Updated" $projectPath "with" $codesignProvision;
       }
-    }
-
-    if (!$updated) {
-      Write-Host $projectPath "wasn't updated"
     }
   }
 }
