@@ -1,11 +1,12 @@
-param([String[]] $TargetBundleIds, [String[]] $ProvisionProfileUuids);
+param([String] $TargetBundleIds, [String] $ProvisionProfileUuids);
 
 if (!$TargetBundleIds -or !$ProvisionProfileUuids -or !$TargetBundleIds.Length  -or !$ProvisionProfileUuids.Length) {
-  exit 0;
+  Write-Host "Invalid number of arguments"
+  exit 1;
 }
 
-$targetBundleIds = $TargetBundleIds.Split(",");
-$provisionProfileUuids = $ProvisionProfileUuids.Split(",");
+[String[]]$targetBundleIds = $TargetBundleIds.Split(",");
+[String[]]$provisionProfileUuids = $ProvisionProfileUuids.Split(",");
 
 function ProcessCsprojFiles {
   Get-ChildItem -Path "./" -Filter "*.csproj" -Recurse -File -Name | ForEach-Object {
@@ -44,7 +45,7 @@ function ParseCsprojFile {
 
   if (!$projectBundleId) {
     Write-Host "Bundle id wasn't found";
-    exit 0;
+    return;
   }
 
   [xml]$csprojXml = Get-Content $projectPath;
