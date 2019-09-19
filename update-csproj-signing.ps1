@@ -1,7 +1,7 @@
 param([String[]] $TargetBundleIds, [String[]] $ProvisionProfileUuids);
 
 if (!$TargetBundleIds -or !$ProvisionProfileUuids -or !$TargetBundleIds.Length  -or !$ProvisionProfileUuids.Length) {
-  return;
+  exit 0;
 }
 
 $targetBundleIds = $TargetBundleIds.Split(",");
@@ -12,7 +12,7 @@ function ProcessCsprojFiles {
     ParseCsprojFile $_
   }
 
-  return
+  exit 0;
 }
 
 # parse csproject file
@@ -44,7 +44,7 @@ function ParseCsprojFile {
 
   if (!$projectBundleId) {
     Write-Host "Bundle id wasn't found";
-    return;
+    exit 0;
   }
 
   [xml]$csprojXml = Get-Content $projectPath;
@@ -76,8 +76,6 @@ function ParseCsprojFile {
       Write-Host $projectPath "wasn't updated"
     }
   }
-
-  return;
 }
 
 # entry point
