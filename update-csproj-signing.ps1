@@ -83,7 +83,7 @@ function ParseProject {
   $project = $csprojXml.Project;
 
   if ($csprojXml.Project -and $csprojXml.Project.PropertyGroup) {
-    for ($i = 0; $i -lt $TargetBundleIds.Length; $i++) {
+    for ($i = 0; $i -lt $TargetBundleIdsParsed.Length; $i++) {
       $bundleId = $TargetBundleIdsParsed[$i];
       if ($bundleId -eq $projectBundleId) {
         $codesignProvision = $ProvisionProfileUuidsParsed[$i];
