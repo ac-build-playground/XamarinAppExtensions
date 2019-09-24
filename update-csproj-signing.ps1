@@ -9,9 +9,6 @@
 
 param([String] $TargetBundleIds, [String] $ProvisionProfileUuids);
 
-Write-Host "TargetBundleIds:" $TargetBundleIds
-Write-Host "ProvisionProfileUuids:" $ProvisionProfileUuids
-
 # validation
 
 if (!$TargetBundleIds) {
@@ -24,8 +21,8 @@ if (!$ProvisionProfileUuids) {
   exit 1;
 }
 
-[String[]]$TargetBundleIdsParsed = $TargetBundleIds.Split(",").Split();
-[String[]]$ProvisionProfileUuidsParsed = $ProvisionProfileUuids.Split(",").Split();
+[String[]]$TargetBundleIdsParsed = $TargetBundleIds.Split(",");
+[String[]]$ProvisionProfileUuidsParsed = $ProvisionProfileUuids.Split(",");
 
 if (!$TargetBundleIdsParsed.Length) {
   Write-Host "TargetBundleIds should be comma-separated string array"
@@ -88,9 +85,7 @@ function ParseProject {
   if ($csprojXml.Project -and $csprojXml.Project.PropertyGroup) {
     for ($i = 0; $i -lt $TargetBundleIdsParsed.Length; $i++) {
       $bundleId = $TargetBundleIdsParsed[$i];
-      Write-Host $i $TargetBundleIdsParsed.Length "Checking bundle" $bundleId $projectBundleId
       if ($bundleId -eq $projectBundleId) {
-        Write-Host "Match!"
         $codesignProvision = $ProvisionProfileUuidsParsed[$i];
         foreach ($propertyGroup in $csprojXml.Project.PropertyGroup) {
           if ($propertyGroup.CodesignProvision) {
@@ -104,7 +99,6 @@ function ParseProject {
 
         $csprojXml.Save($projectPath);
         Write-Host "Updated" $projectPath "with" $codesignProvision;
-        break;
       }
     }
   }
