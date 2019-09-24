@@ -99,6 +99,7 @@ function ParseProject {
 
         $csprojXml.Save($projectPath);
         Write-Host "Updated" $projectPath "with" $codesignProvision;
+        break;
       }
     }
   }
