@@ -21,20 +21,20 @@ if (!$ProvisionProfileUuids) {
   exit 1;
 }
 
-[String[]]$TargetBundleIds = $TargetBundleIds.Split(",");
-[String[]]$ProvisionProfileUuids = $ProvisionProfileUuids.Split(",");
+[String[]]$TargetBundleIdsParsed = $TargetBundleIds.Split(",");
+[String[]]$ProvisionProfileUuidsParsed = $ProvisionProfileUuids.Split(",");
 
-if (!$TargetBundleIds.Length) {
+if (!$TargetBundleIdsParsed.Length) {
   Write-Host "TargetBundleIds should be comma-separated string array"
   exit 1;
 }
 
-if (!$ProvisionProfileUuids.Length) {
+if (!$ProvisionProfileUuidsParsed.Length) {
   Write-Host "ProvisionProfileUuids should be comma-separated string array"
   exit 1;
 }
 
-if ($TargetBundleIds.Length -ne $ProvisionProfileUuids.Length) {
+if ($TargetBundleIdsParsed.Length -ne $ProvisionProfileUuidsParsed.Length) {
   Write-Host "TargetBundleIds and ProvisionProfileUuids should be the same length"
   exit 1;
 }
@@ -83,12 +83,10 @@ function ParseProject {
   $project = $csprojXml.Project;
 
   if ($csprojXml.Project -and $csprojXml.Project.PropertyGroup) {
-    Write-Host $TargetBundleIds.Length
     for ($i = 0; $i -lt $TargetBundleIds.Length; $i++) {
-      $bundleId = $TargetBundleIds[$i];
-      Write-Host $bundleId $TargetBundleIds[$i]
+      $bundleId = $TargetBundleIdsParsed[$i];
       if ($bundleId -eq $projectBundleId) {
-        $codesignProvision = $ProvisionProfileUuids[$i];
+        $codesignProvision = $ProvisionProfileUuidsParsed[$i];
         foreach ($propertyGroup in $csprojXml.Project.PropertyGroup) {
           if ($propertyGroup.CodesignProvision) {
             $propertyGroup.CodesignProvision = $codesignProvision;
@@ -107,13 +105,4 @@ function ParseProject {
 }
 
 # entry point
-
-Write-Host ""
-Write-Host "Looking fow following bundle ids:"
-Write-Host $TargetBundleIds | Format-List
-Write-Host ""
-Write-Host "Updating with following provision profile UUIDs:"
-Write-Host $ProvisionProfileUuids | Format-List
-Write-Host ""
-
 ProcessCsprojFiles
