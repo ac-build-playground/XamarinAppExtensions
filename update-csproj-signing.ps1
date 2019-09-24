@@ -105,4 +105,13 @@ function ParseProject {
 }
 
 # entry point
+
+Write-Host ""
+Write-Host "Looking fow following bundle ids:"
+Write-Host $TargetBundleIds | Format-List
+Write-Host ""
+Write-Host "Updating with following provision profile UUIDs:"
+Write-Host $ProvisionProfileUuids | Format-List
+Write-Host ""
+
 ProcessCsprojFiles
