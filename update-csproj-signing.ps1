@@ -85,7 +85,9 @@ function ParseProject {
   if ($csprojXml.Project -and $csprojXml.Project.PropertyGroup) {
     for ($i = 0; $i -lt $TargetBundleIdsParsed.Length; $i++) {
       $bundleId = $TargetBundleIdsParsed[$i];
+      Write-Host $i $TargetBundleIdsParsed.Length "Checking bundle" $bundleId $projectBundleId
       if ($bundleId -eq $projectBundleId) {
+        Write-Host "Match!"
         $codesignProvision = $ProvisionProfileUuidsParsed[$i];
         foreach ($propertyGroup in $csprojXml.Project.PropertyGroup) {
           if ($propertyGroup.CodesignProvision) {
@@ -99,6 +101,7 @@ function ParseProject {
 
         $csprojXml.Save($projectPath);
         Write-Host "Updated" $projectPath "with" $codesignProvision;
+        break;
       }
     }
   }
