@@ -24,8 +24,8 @@ if (!$ProvisionProfileUuids) {
   exit 1;
 }
 
-[String[]]$TargetBundleIdsParsed = $TargetBundleIds.Split(",");
-[String[]]$ProvisionProfileUuidsParsed = $ProvisionProfileUuids.Split(",");
+[String[]]$TargetBundleIdsParsed = $TargetBundleIds.Split(",").Split();
+[String[]]$ProvisionProfileUuidsParsed = $ProvisionProfileUuids.Split(",").Split();
 
 if (!$TargetBundleIdsParsed.Length) {
   Write-Host "TargetBundleIds should be comma-separated string array"
