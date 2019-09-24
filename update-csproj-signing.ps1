@@ -1,23 +1,54 @@
+# Script for updating Xamarin.iOS signing configuration
+# For each csproj file it looks for corresponding Info.plist to get its bundleId
+# Then if detected bundle id matches one of specified id in arguments it sets <CodesignProvision> to corresponding profile UUID
+#
+# TargetBundleIds - comma separated list of target bundle ids,
+#   e.g. "com.test.container,com.test.today-extension,com.test.watch-extension,"
+# ProvisionProfileUuids - comma separated list of provision profile UUIDs
+#
+
 param([String] $TargetBundleIds, [String] $ProvisionProfileUuids);
 
-if (!$TargetBundleIds -or !$ProvisionProfileUuids -or !$TargetBundleIds.Length  -or !$ProvisionProfileUuids.Length) {
-  Write-Host "Invalid number of arguments"
+# validation
+
+if (!$TargetBundleIds) {
+  Write-Host "TargetBundleIds is required"
   exit 1;
 }
 
-[String[]]$targetBundleIds = $TargetBundleIds.Split(",");
-[String[]]$provisionProfileUuids = $ProvisionProfileUuids.Split(",");
+if (!$ProvisionProfileUuids) {
+  Write-Host "ProvisionProfileUuids is required"
+  exit 1;
+}
+
+[String[]]$TargetBundleIds = $TargetBundleIds.Split(",");
+[String[]]$ProvisionProfileUuids = $ProvisionProfileUuids.Split(",");
+
+if (!$TargetBundleIds.Length) {
+  Write-Host "TargetBundleIds should be comma-separated string array"
+  exit 1;
+}
+
+if (!$ProvisionProfileUuids.Length) {
+  Write-Host "ProvisionProfileUuids should be comma-separated string array"
+  exit 1;
+}
+
+if ($TargetBundleIds.Length -ne $ProvisionProfileUuids.Length) {
+  Write-Host "TargetBundleIds and ProvisionProfileUuids should be the same length"
+  exit 1;
+}
 
 function ProcessCsprojFiles {
   Get-ChildItem -Path "./" -Filter "*.csproj" -Recurse -File -Name | ForEach-Object {
-    ParseCsprojFile $_
+    ParseProject $_
   }
 
   exit 0;
 }
 
 # parse csproject file
-function ParseCsprojFile {
+function ParseProject {
   $projectPath = $args[0];
  
   Write-Host "==============="
@@ -52,10 +83,10 @@ function ParseCsprojFile {
   $project = $csprojXml.Project;
 
   if ($csprojXml.Project -and $csprojXml.Project.PropertyGroup) {
-    for ($i = 0; $i -lt $targetBundleIds.Length; $i++) {
-      $bundleId = $targetBundleIds[$i];
+    for ($i = 0; $i -lt $TargetBundleIds.Length; $i++) {
+      $bundleId = $TargetBundleIds[$i];
       if ($bundleId -eq $projectBundleId) {
-        $codesignProvision = $provisionProfileUuids[$i];
+        $codesignProvision = $ProvisionProfileUuids[$i];
         foreach ($propertyGroup in $csprojXml.Project.PropertyGroup) {
           if ($propertyGroup.CodesignProvision) {
             $propertyGroup.CodesignProvision = $codesignProvision;
