@@ -9,6 +9,9 @@
 
 param([String] $TargetBundleIds, [String] $ProvisionProfileUuids);
 
+Write-Host "TargetBundleIds:" $TargetBundleIds
+Write-Host "ProvisionProfileUuids:" $ProvisionProfileUuids
+
 # validation
 
 if (!$TargetBundleIds) {
